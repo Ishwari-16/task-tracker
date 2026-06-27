@@ -58,9 +58,14 @@ function TaskForm({ fetchTasks,editTask,setEditTask }) {
 
   } catch (error) {
 
-    alert("Something went wrong");
+  console.log("ERROR:", error.response?.data || error.message);
 
-  }
+  alert(
+    error.response?.data?.message ||
+    "Something went wrong"
+  );
+
+}
   formRef.current?.scrollIntoView({
     behavior: "smooth",
     block: "start",
