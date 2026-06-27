@@ -57,14 +57,11 @@ function TaskForm({ fetchTasks,editTask,setEditTask }) {
     fetchTasks();
 
   } catch (error) {
+  console.log("FULL ERROR:", error);
+  console.log("Response:", error.response);
+  console.log("Data:", error.response?.data);
 
-  console.log("ERROR:", error.response?.data || error.message);
-
-  alert(
-    error.response?.data?.message ||
-    "Something went wrong"
-  );
-
+  alert(error.response?.data?.message || error.message);
 }
   formRef.current?.scrollIntoView({
     behavior: "smooth",
