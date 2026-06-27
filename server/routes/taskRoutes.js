@@ -10,12 +10,7 @@ const {
 
 router.post("/", createTask);
 
-//router.get("/", getTasks);
-
-router.get("/tasks", async (req,res)=>{
-  const tasks = await Task.find();
-  res.json(tasks);
-});
+router.get("/", getTasks);
 
 router.put("/:id", updateTask);
 
