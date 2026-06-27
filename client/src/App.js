@@ -18,13 +18,17 @@ function App() {
   }
   },[]);
   const fetchTasks = async () => {
-    try {
-      const res = await API.get("/tasks");
-      setTasks(res.data.tasks);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  try {
+    const response = await API.get("/tasks");
+
+    console.log("API Response:", response.data);
+
+    setTasks(response.data);
+
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 
   useEffect(() => {
