@@ -20,7 +20,7 @@ function App() {
   const fetchTasks = async () => {
     try {
       const res = await API.get("/tasks");
-      setTasks(res.data);
+      setTasks(res.data.tasks);
     } catch (err) {
       console.log(err);
     }
