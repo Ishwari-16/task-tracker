@@ -11,22 +11,27 @@ function TaskList({ tasks, fetchTasks, setEditTask }) {
     fetchTasks();
   };
 
+  // Safety check: make sure tasks is always an array
+  const taskList = Array.isArray(tasks) ? tasks : [];
+
   return (
     <div
       style={{
-      border:"4px solid #6d28d9",
-      padding:"25px",
-      borderRadius:"18px",
-      background:"white",
-      marginTop:"30px"
-    }}
+        border: "4px solid #6d28d9",
+        padding: "25px",
+        borderRadius: "18px",
+        background: "white",
+        marginTop: "30px"
+      }}
     >
+
       <h2>Task List</h2>
 
-      {tasks.length === 0 ? (
+      {taskList.length === 0 ? (
         <p>No Tasks Found</p>
       ) : (
-        tasks.map((task) => (
+        taskList.map((task) => (
+
           <div
             key={task._id}
             style={{
@@ -35,56 +40,65 @@ function TaskList({ tasks, fetchTasks, setEditTask }) {
               padding: "15px",
             }}
           >
+
             <h3>{task.title}</h3>
 
             <p>{task.description}</p>
 
+
             <p>
-              
-          <span
-              className={`status ${
-              task.status==="Pending"
-              ?"pending"
-              :task.status==="In Progress"
-              ?"progress"
-              :"completed"
-              }`}
-            >
-            {task.status}
-          </span>
+              <span
+                className={`status ${
+                  task.status === "Pending"
+                    ? "pending"
+                    : task.status === "In Progress"
+                    ? "progress"
+                    : "completed"
+                }`}
+              >
+                {task.status}
+              </span>
             </p>
+
+
             <p>
-              <FaCalendarAlt/>
+              <FaCalendarAlt />{" "}
               {task.dueDate
-                ?
-                new Date(task.dueDate).toLocaleDateString()
-                :
-                "No Due Date"
+                ? new Date(task.dueDate).toLocaleDateString()
+                : "No Due Date"
               }
             </p>
+
+
             <button
-  className="edit"
-  onClick={() => {
-    console.log("Edit clicked");
-    console.log(task);
-    setEditTask(task);
-  }}
->
-  <FaEdit /> Edit
-</button>
+              className="edit"
+              onClick={() => {
+                console.log("Edit clicked");
+                console.log(task);
+                setEditTask(task);
+              }}
+            >
+              <FaEdit /> Edit
+            </button>
+
 
             {" "}
 
+
             <button
               className="delete"
-              onClick={()=>deleteTask(task._id)}
+              onClick={() => deleteTask(task._id)}
             >
-              <FaTrash/>
+              <FaTrash />
               Delete
-              </button>
+            </button>
+
+
           </div>
+
         ))
       )}
+
     </div>
   );
 }
